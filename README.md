@@ -1,7 +1,7 @@
 # angular-raven
 Include Raven.js and Raven.config('YOUR_PUBLIC_DSN').install()
-<code>
-  angular.module('yourApp', [
+<code><pre>
+  angular.module('YOUR_APP', [
     'angular-raven'
   ])
-</code>
+</code></pre>
