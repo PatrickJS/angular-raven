@@ -1,5 +1,5 @@
 # angular-raven [![Build Status](https://travis-ci.org/gdi2290/angular-raven.png?branch=master)](https://travis-ci.org/gdi2290/angular-raven)
-A Raven.js / Sentry wrapper for Angular.js
+A Raven.js / Sentry wrapper for Angular.js to hook into errors that Angular emits
 
 #How do I add this to my project?
 
@@ -11,7 +11,6 @@ You can download angular-raven by:
 
 
 ````html
-<!-- Use LATEST folder to always get the latest version-->
 <script src="//cdnjs.cloudflare.com/ajax/libs/raven.js/1.0.8/raven.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.2/angular.min.js"></script>
 <script>
@@ -21,7 +20,7 @@ You can download angular-raven by:
 <script>
   angular.module('YOUR_APP', [
     'angular-raven'
-  ]);  
+  ]);
 </script>
 
 ````
