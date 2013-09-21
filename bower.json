@@ -1,6 +1,6 @@
 {
   "name": "angular-raven",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": "angular-raven.js",
   "dependencies": {
     "angular": "~1.2.0-rc.2"
