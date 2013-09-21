@@ -25,4 +25,4 @@ You can download angular-raven by:
 
 ````
 
-Initializing Raven.js outside of Angular allows Raven to track errors when Angular wasn't able to bootup correctly.
+Initializing Raven.js outside of Angular allows Raven to track errors when Angular wasn't able to bootstrap correctly.
