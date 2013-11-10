@@ -40,8 +40,8 @@ You can download angular-raven by:
 
   angular.module('controllers', [])
     .controller('MainCtrl', function($scope, Raven) {
-      $scope.logError = function(event) {
-        Raven.captureMessage('Error', event);
+      $scope.logError = function() {
+        Raven.captureMessage('Error');
       };
     });
 </script>
