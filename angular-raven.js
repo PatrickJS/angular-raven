@@ -59,6 +59,43 @@ module.provider('Raven', function() {
 
         return RavenService.wrap(options, func).apply(this, args);
       },
+      wrap: function(options, func) {
+        var RavenService = this;
+
+        if (isUndefined(func) && !isFunction(options)) {
+          return options;
+        }
+
+        if (isFunction(options)) {
+          func = options;
+          options = undefined;
+        }
+
+        if (!isFunction(func)) {
+          return func;
+        }
+
+        if (func.__raven__) {
+          return func;
+        }
+
+        function wrapped() {
+          var args = [], i = arguments.length;
+          while(i--) args[i] = Raven.wrap(options, arguments[i]);
+          try {
+            return func.apply(this, args);
+          } catch(e) {
+            RavenService.captureException(e, options);
+          }
+        }
+
+        for (var property in func) {
+          if (func.hasOwnProperty(property)) {
+            wrapped[property] = func[property];
+          }
+        }
+        wrapped.__raven__ = true;
+        return wrapped;
       }
 
     };
