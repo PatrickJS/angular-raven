@@ -38,6 +38,13 @@ module.provider('Raven', function() {
         } else {
           $window.Raven.setUser(user);
         }
+      },
+      lastException: function lastException() {
+        if (_development) {
+          $log.error('Raven: Last Exception ', user);
+        } else {
+          $window.Raven.lastException();
+        }
       }
 
     };
