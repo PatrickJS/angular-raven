@@ -41,7 +41,7 @@ module.provider('Raven', function() {
       },
       lastException: function lastException() {
         if (_development) {
-          $log.error('Raven: Last Exception ', user);
+          $log.error('Raven: Last Exception');
         } else {
           $window.Raven.lastException();
         }
