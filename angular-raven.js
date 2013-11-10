@@ -1,5 +1,5 @@
 (function(module, angular, undefined) {
-"use strict";
+'use strict';
 
 module.provider('Raven', function() {
   var _development = null;
@@ -74,7 +74,7 @@ module.provider('Raven', function() {
 
         function wrapped() {
           var args = [], i = arguments.length;
-          while(i--) args[i] = Raven.wrap(options, arguments[i]);
+          while(i--) args[i] = RavenService.wrap(options, arguments[i]);
           try {
             return func.apply(this, args);
           } catch(e) {
