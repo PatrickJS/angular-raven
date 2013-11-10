@@ -15,7 +15,7 @@ module.provider('Raven', function() {
         if (_development) {
           $log.error('Raven: Exception ', exception, cause);
         } else {
-          $window.Raven.captureException(exception);
+          $window.Raven.captureException(exception, cause);
         }
       },
       captureMessage: function captureMessage(message, data) {
