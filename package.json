@@ -1,6 +1,6 @@
 {
   "name": "angular-raven",
-  "version": "0.0.4",
+  "version": "0.5.0",
   "main": "angular-raven.js",
   "description": "A Raven.js / Sentry wrapper for Angular.js",
   "homepage": "https://github.com/gdi2290/angular-raven",
@@ -20,7 +20,6 @@
     }
   ],
   "dependencies": {
-    "raven": "~0.5.2"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
