@@ -17,14 +17,14 @@ You can download angular-raven by:
 <script src="http://cdnjs.cloudflare.com/ajax/libs/raven.js/1.0.8/raven.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.js"></script>
 <script>
-  Raven.config('YOUR_PUBLIC_DSN')
-    .install({
+  Raven.config('YOUR_PUBLIC_DSN', {
       // Raven settings
     })
     .setUser({
       "id": "SERVER_RENDERED_ID",
       "email": "SERVER_RENDERED_EMAIL"
-    });
+    })
+    .install()
 <script>
 <script src="app/bower_components/angular-raven/angular-raven.js"></script>
 
