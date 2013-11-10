@@ -47,6 +47,18 @@ module.provider('Raven', function() {
         } else {
           $window.Raven.lastException();
         }
+      },
+      context: function(options, func, args) {
+        var RavenService = this;
+
+        if (isFunction(options)) {
+          args = func || [];
+          func = options;
+          options = undefined;
+        }
+
+        return RavenService.wrap(options, func).apply(this, args);
+      },
       }
 
     };
