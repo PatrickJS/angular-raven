@@ -1,21 +1,33 @@
-(function() {
-  "use strict";
+(function(module, angular, undefined) {
+"use strict";
 
-  angular.module('angular-raven', ['ng'])
-    .factory('$exceptionHandler', ['$window', '$log',
-      function($window, $log) {
-        if ($window.Raven) {
-          return function(exception, cause) {
-            $log.error.apply($log, arguments);
-            Raven.captureException(exception);
-          };
+module.provider('Raven', function() {
+  var _development = null;
+
+  this.development = function(config) {
+    _development = config || _development;
+    return this;
+  }
+
+  this.$get = ['$window', '$log', function($window, $log) {
         } else {
           return function(exception, cause) {
             $log.error.apply($log, arguments);
           };
         }
       }
-    ]);
 
-}());
+    };
 
+    return service;
+  }]; // end $get
+}); // end provider
+
+module.factory('$exceptionHandler', ['Raven', function(Raven) {
+  return function(exception, cause) {
+    Raven.captureException(exception, cause);
+  };
+}]);
+
+
+}(angular.module('ngRaven', []), angular));
