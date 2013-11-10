@@ -27,13 +27,6 @@ module.provider('Raven', function() {
           $window.Raven.captureMessage(message, data);
         }
       },
-      context: function context(func) {
-        try {
-          func();
-        } catch(event) {
-          _captureException(event);
-        }
-      },
       setUser: function setUser(user) {
         if (_development) {
           $log.error('Raven: User ', user);
