@@ -53,7 +53,7 @@ Initializing Raven.js outside of Angular allows Raven to track errors when Angul
 
 The community has compiled a list of common ignore rules for common things, like Facebook, Chrome extensions, etc.
 ```javascript
-Raven.config('YOUR_PUBLIC_DSN').install({
+Raven.config('YOUR_PUBLIC_DSN', {
   logger: 'javascript',
   ignoreErrors: [
     // Random plugins/extensions
@@ -93,4 +93,4 @@ Raven.config('YOUR_PUBLIC_DSN').install({
     /webappstoolbarba\.texthelp\.com\//i,
     /metrics\.itunes\.apple\.com\.edgesuite\.net\//i
   ]
-});
+}).install();
