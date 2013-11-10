@@ -11,6 +11,9 @@ You can download angular-raven by:
 
 
 ````html
+<body ng-app="YOUR_APP" ng-controller="MainCtrl">
+  <a href="#error" ng-click="logError()">Log Error</a>
+</body>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/raven.js/1.0.8/raven.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.js"></script>
 <script>
@@ -24,6 +27,7 @@ You can download angular-raven by:
     });
 <script>
 <script src="app/bower_components/angular-raven/angular-raven.js"></script>
+
 <script>
   angular.module('YOUR_APP', [
     'ngRaven',
@@ -34,11 +38,12 @@ You can download angular-raven by:
     RavenProvider.development(true);
   });
 
-  angular.module('controllers', []).controller('Main', function($scope, Raven) {
-    $scope.logError = function() {
-      Raven.captureMessage('Error', err);
-    };
-  });
+  angular.module('controllers', [])
+    .controller('MainCtrl', function($scope, Raven) {
+      $scope.logError = function(event) {
+        Raven.captureMessage('Error', event);
+      };
+    });
 </script>
 
 ````
