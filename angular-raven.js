@@ -11,6 +11,8 @@ module.provider('Raven', function() {
 
   this.$get = ['$window', '$log', function($window, $log) {
     var service = {
+      VERSION: $window.Raven.VERSION,
+      TraceKit: $window.Raven.TraceKit,
       captureException: function captureException(exception, cause) {
         if (_development) {
           $log.error('Raven: Exception ', exception, cause);
