@@ -10,10 +10,33 @@ module.provider('Raven', function() {
   }
 
   this.$get = ['$window', '$log', function($window, $log) {
+    var service = {
+      captureException: function captureException(exception, cause) {
+        if (_development) {
+          $log.error('Raven: Exception ', exception, cause);
         } else {
-          return function(exception, cause) {
-            $log.error.apply($log, arguments);
-          };
+          $window.Raven.captureException(exception);
+        }
+      },
+      captureMessage: function captureMessage(message, data) {
+        if (_development) {
+          $log.error('Raven: Message ', message, data);
+        } else {
+          $window.Raven.captureMessage(message, data);
+        }
+      },
+      context: function context(func) {
+        try {
+          func();
+        } catch(event) {
+          _captureException(event);
+        }
+      },
+      setUser: function setUser(user) {
+        if (_development) {
+          $log.error('Raven: User ', user);
+        } else {
+          $window.Raven.setUser(user);
         }
       }
 
