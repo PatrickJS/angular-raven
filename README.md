@@ -1,5 +1,5 @@
 # angular-raven [![Build Status](https://travis-ci.org/gdi2290/angular-raven.png?branch=master)](https://travis-ci.org/gdi2290/angular-raven)
-A Raven.js / Sentry wrapper for Angular.js to hook into the exception handler that Angular provides
+A Raven.js / Sentry wrapper for Angular.js
 
 #How do I add this to my project?
 
