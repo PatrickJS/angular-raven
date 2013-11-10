@@ -52,5 +52,4 @@ module.factory('$exceptionHandler', ['Raven', function(Raven) {
   };
 }]);
 
-
 }(angular.module('ngRaven', []), angular));
