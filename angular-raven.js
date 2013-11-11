@@ -7,7 +7,7 @@ module.provider('Raven', function() {
   this.development = function(config) {
     _development = config || _development;
     return this;
-  }
+  };
 
   this.$get = ['$window', '$log', function($window, $log) {
     var service = {
