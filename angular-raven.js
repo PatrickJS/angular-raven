@@ -44,7 +44,7 @@ module.provider('Raven', function() {
       context: function(options, func, args) {
         var RavenService = this;
 
-        if (isFunction(options)) {
+        if (angular.isFunction(options)) {
           args = func || [];
           func = options;
           options = undefined;
@@ -55,16 +55,16 @@ module.provider('Raven', function() {
       wrap: function(options, func) {
         var RavenService = this;
 
-        if (isUndefined(func) && !isFunction(options)) {
+        if (angular.isUndefined(func) && !angular.isFunction(options)) {
           return options;
         }
 
-        if (isFunction(options)) {
+        if (angular.isFunction(options)) {
           func = options;
           options = undefined;
         }
 
-        if (!isFunction(func)) {
+        if (!angular.isFunction(func)) {
           return func;
         }
 
