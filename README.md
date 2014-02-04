@@ -15,7 +15,7 @@ You can download angular-raven by:
   <a href="#error" ng-click="logError()">Log Error</a>
 </body>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/raven.js/1.0.8/raven.min.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.js"></script>
 <script>
   Raven.config('YOUR_PUBLIC_DSN', {
       // Raven settings
