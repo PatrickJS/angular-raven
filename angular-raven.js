@@ -27,11 +27,11 @@ module.provider('Raven', function() {
           $window.Raven.captureMessage(message, data);
         }
       },
-      setUser: function setUser(user) {
+      setUserContext: function setUserContext(user) {
         if (_development) {
           $log.error('Raven: User ', user);
         } else {
-          $window.Raven.setUser(user);
+          $window.Raven.setUserContext(user);
         }
       },
       lastException: function lastException() {
