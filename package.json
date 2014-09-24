@@ -1,6 +1,6 @@
 {
   "name": "angular-raven",
-  "version": "0.5.7",
+  "version": "0.5.8",
   "main": "angular-raven.js",
   "description": "A Raven.js / Sentry wrapper for Angular.js",
   "homepage": "https://github.com/gdi2290/angular-raven",
