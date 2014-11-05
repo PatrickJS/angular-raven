@@ -25,7 +25,7 @@ You can download angular-raven by:
       "email": "SERVER_RENDERED_EMAIL"
     })
     .install()
-<script>
+</script>
 <script src="app/bower_components/angular-raven/angular-raven.js"></script>
 
 <script>
