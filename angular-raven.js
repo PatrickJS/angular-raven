@@ -41,9 +41,9 @@
           if (_development) {
             $log.info('Raven: User ', user);
           } else {
-            if ($window.Raven.setUser) {
+            if ($window.Raven.setUserContext) {
               $window.Raven.setUserContext(user);
-            } else if ($window.Raven.setUserContext) {
+            } else if ($window.Raven.setUser) {
               $window.Raven.setUser(user);
             }
           }
