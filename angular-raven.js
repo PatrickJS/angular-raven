@@ -14,9 +14,8 @@
         VERSION: ($window.Raven) ? $window.Raven.VERSION : 'development',
         TraceKit: ($window.Raven) ? $window.Raven.TraceKit : 'development',
         captureException: function captureException(exception, cause) {
-          if (_development) {
-            $log.error('Raven: Exception ', exception, cause);
-          } else {
+          $log.error('Raven: Exception ', exception, cause);
+          if (!_development) {
             $window.Raven.captureException(exception, cause);
           }
         },
