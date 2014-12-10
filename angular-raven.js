@@ -117,4 +117,8 @@
     };
   }]);
 
+  module.factory('$raven', ['Raven', function(Raven) {
+    return Raven;
+  }]);
+
 }(angular.module('ngRaven', []), angular);
