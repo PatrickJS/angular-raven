@@ -113,7 +113,15 @@
 
   module.factory('$exceptionHandler', ['Raven', function(Raven) {
     return function(exception, cause) {
-      Raven.captureException(exception, cause);
+      if (exception instanceof Error) {
+        Raven.captureException(exception, cause);
+      } else {
+        Raven.captureMessage(exception, {
+          exception: exception,
+          cause: cause
+        });
+      }
+
     };
   }]);
 
