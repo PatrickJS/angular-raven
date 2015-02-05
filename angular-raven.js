@@ -20,9 +20,8 @@
           }
         },
         captureMessage: function captureMessage(message, data) {
-          if (_development) {
-            $log.error('Raven: Message ', message, data);
-          } else {
+          $log.error('Raven: Message ', message, data);
+          if (!_development) {
             $window.Raven.captureMessage(message, data);
           }
         },
