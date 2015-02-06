@@ -33,9 +33,9 @@ You can download angular-raven by:
     'ngRaven',
     'controllers'
   ])
-  .config(function(RavenProvider) {
+  .config(function($ravenProvider) {
     // There is a development flag to log errors rather than sending it to Sentry
-    RavenProvider.development(true);
+    $ravenProvider.development(true);
   });
 
   angular.module('controllers', [])
