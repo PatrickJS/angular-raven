@@ -1,7 +1,7 @@
-!function(module, angular, undefined) {
+(function(global, angular, undefined) {
   'use strict';
 
-  module.provider('Raven', function() {
+  function $RavenProvider() {
     var _development = null;
 
     this.development = function(config) {
@@ -14,15 +14,17 @@
         VERSION: ($window.Raven) ? $window.Raven.VERSION : 'development',
         TraceKit: ($window.Raven) ? $window.Raven.TraceKit : 'development',
         captureException: function captureException(exception, cause) {
-          $log.error('Raven: Exception ', exception, cause);
           if (!_development) {
             $window.Raven.captureException(exception, cause);
+          } else {
+            $log.error('Raven: Exception ', exception, cause);
           }
         },
         captureMessage: function captureMessage(message, data) {
-          $log.error('Raven: Message ', message, data);
           if (!_development) {
             $window.Raven.captureMessage(message, data);
+          } else {
+            $log.error('Raven: Message ', message, data);
           }
         },
         setUser: function setUser(user) {
@@ -108,10 +110,10 @@
 
       return service;
     }]; // end $get
-  }); // end provider
+  } // end provider
 
-  module.factory('$exceptionHandler', ['Raven', function(Raven) {
-    return function(exception, cause) {
+  function $ExceptionHandlerDecorator($delegate, Raven) {
+    function $ExceptionHandler(exception, cause) {
       if (exception instanceof Error) {
         Raven.captureException(exception, cause);
       } else {
@@ -120,12 +122,22 @@
           cause: cause
         });
       }
+      $delegate(exception, cause);
+    }
+    return $ExceptionHandler;
+  }
 
-    };
+
+  angular.module('ngRaven', [])
+  .provider('$raven', $RavenProvider)
+  .factory('Raven',  ['$raven', function($raven) {
+    return $raven;
+  }])
+  .config(['$provide', function($provide) {
+    $provide.decorator('$exceptionHandler', ['$delegate', 'Raven', $ExceptionHandlerDecorator]);
   }]);
 
-  module.factory('$raven', ['Raven', function(Raven) {
-    return Raven;
-  }]);
 
-}(angular.module('ngRaven', []), angular);
+  angular.module('angular-raven', ['ngRaven']);
+
+}(this, angular));
