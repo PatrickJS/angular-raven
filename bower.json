@@ -1,6 +1,6 @@
 {
   "name": "angular-raven",
-  "version": "0.5.9",
+  "version": "0.5.10",
   "main": "angular-raven.js",
   "keywords": [
     "Patrick",
@@ -37,6 +37,6 @@
   ],
   "dependencies": {
     "angular": "*",
-    "raven-js": "~1.1.16"
+    "raven-js": "*"
   }
 }
