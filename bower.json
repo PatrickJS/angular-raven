@@ -1,6 +1,6 @@
 {
   "name": "angular-raven",
-  "version": "0.5.10",
+  "version": "0.5.11",
   "main": "angular-raven.js",
   "keywords": [
     "Patrick",
@@ -22,7 +22,7 @@
   "authors": [
     {
       "name": "Patrick Stapleton",
-      "email": "patrick@gdi2290.com",
+      "email": "github@gdi2290.com",
       "url": "www.gdi2290.com"
     }
   ],
