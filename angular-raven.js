@@ -1,8 +1,9 @@
 (function(global, angular, undefined) {
   'use strict';
 
+  var _development = null;
+
   function $RavenProvider() {
-    var _development = null;
 
     this.development = function(config) {
       _development = config || _development;
@@ -130,11 +131,9 @@
 
   angular.module('ngRaven', [])
   .provider('$raven', $RavenProvider)
-  .factory('Raven',  ['$raven', function($raven) {
-    return $raven;
-  }])
+  .provider('Raven',  $RavenProvider)
   .config(['$provide', function($provide) {
-    $provide.decorator('$exceptionHandler', ['$delegate', 'Raven', $ExceptionHandlerDecorator]);
+    $provide.decorator('$exceptionHandler', ['$delegate', '$raven', $ExceptionHandlerDecorator]);
   }]);
 
 
