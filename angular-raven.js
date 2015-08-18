@@ -57,6 +57,13 @@
             $window.Raven.lastException();
           }
         },
+        setExtraContext: function setExtraContext(data) {
+          if (_development) {
+            $log.info('Raven: Extra Context ', data);
+          } else {
+            $window.Raven.setExtraContext(data);
+          }
+        },
         context: function context(options, func, args) {
           var RavenService = this;
 
