@@ -37,13 +37,25 @@ module.exports = function (grunt) {
         files: '<%= jshint.test.src %>',
         tasks: ['jshint:test', 'nodeunit']
       }
+    },
+    uglify: {
+      options: {
+        compress: true,
+        mangle: true
+      },
+      dist: {
+        files: {
+          'angular-raven.min.js': ['angular-raven.js']
+        }
+      }
     }
   });
 
   // Default task.
   grunt.registerTask('default', [
     'jshint',
-    'nodeunit'
+    'nodeunit',
+    'uglify'
   ]);
 
 };

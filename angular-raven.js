@@ -57,6 +57,20 @@
             $window.Raven.lastException();
           }
         },
+        setExtraContext: function setExtraContext(data) {
+          if (_development) {
+            $log.info('Raven: Extra Context ', data);
+          } else {
+            $window.Raven.setExtraContext(data);
+          }
+        },
+        setTagsContext: function setTagsContext(data) {
+          if (_development) {
+            $log.info('Raven: Tags Context ', data);
+          } else {
+            $window.Raven.setTagsContext(data);
+          }
+        },
         context: function context(options, func, args) {
           var RavenService = this;
 
