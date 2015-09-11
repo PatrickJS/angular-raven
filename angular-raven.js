@@ -104,7 +104,9 @@
 
           function wrapped() {
             var args = [], i = arguments.length;
-            while(i--) args[i] = RavenService.wrap(options, arguments[i]);
+            while(i--) {
+              args[i] = RavenService.wrap(options, arguments[i]);
+            }
             try {
               return func.apply(this, args);
             } catch(e) {
