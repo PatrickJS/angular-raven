@@ -102,7 +102,7 @@
             return func;
           }
 
-          function wrapped() {
+          function Wrapped() {
             var args = [], i = arguments.length;
             while(i--) {
               args[i] = RavenService.wrap(options, arguments[i]);
@@ -116,11 +116,11 @@
 
           for (var property in func) {
             if (func.hasOwnProperty(property)) {
-              wrapped[property] = func[property];
+              Wrapped[property] = func[property];
             }
           }
-          wrapped.__raven__ = true;
-          return wrapped;
+          Wrapped.__raven__ = true;
+          return Wrapped;
         }
 
       };
