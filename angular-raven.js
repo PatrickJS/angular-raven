@@ -102,9 +102,11 @@
             return func;
           }
 
-          function wrapped() {
+          function Wrapped() {
             var args = [], i = arguments.length;
-            while(i--) args[i] = RavenService.wrap(options, arguments[i]);
+            while(i--) {
+              args[i] = RavenService.wrap(options, arguments[i]);
+            }
             try {
               return func.apply(this, args);
             } catch(e) {
@@ -114,11 +116,11 @@
 
           for (var property in func) {
             if (func.hasOwnProperty(property)) {
-              wrapped[property] = func[property];
+              Wrapped[property] = func[property];
             }
           }
-          wrapped.__raven__ = true;
-          return wrapped;
+          Wrapped.__raven__ = true;
+          return Wrapped;
         }
 
       };
@@ -127,18 +129,35 @@
     }]; // end $get
   } // end provider
 
-  function $ExceptionHandlerDecorator($delegate, Raven) {
+  function $ExceptionHandlerProvider($provide) {
+    $provide.decorator('$exceptionHandler', [
+      '$delegate', '$raven', '$injector',
+      $ExceptionHandlerDecorator
+    ]);
+  }
+
+  function $ExceptionHandlerDecorator($delegate, $raven, $injector) {
+    // If we try to include a $location object, we will get:
+    // "Circular dependency found: $location <- $exceptionHandler <- $rootScope"
+    // Therefore, we inject it.
+    var $location;
+
     function $ExceptionHandler(exception, cause) {
-      if (exception instanceof Error) {
-        Raven.captureException(exception, cause);
-      } else {
-        Raven.captureMessage(exception, {
+      $location = $location || $injector.get('$location');
+
+      var exception_data = {
+        culprit: $location.absUrl(),
+        extra: {
           exception: exception,
           cause: cause
-        });
-      }
+        }
+      };
+
+      $raven.captureException(exception, exception_data);
+
       $delegate(exception, cause);
     }
+
     return $ExceptionHandler;
   }
 
@@ -146,9 +165,7 @@
   angular.module('ngRaven', [])
   .provider('$raven', $RavenProvider)
   .provider('Raven',  $RavenProvider)
-  .config(['$provide', function($provide) {
-    $provide.decorator('$exceptionHandler', ['$delegate', '$raven', $ExceptionHandlerDecorator]);
-  }]);
+  .config(['$provide', $ExceptionHandlerProvider]);
 
 
   angular.module('angular-raven', ['ngRaven']);
