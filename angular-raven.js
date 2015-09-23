@@ -169,7 +169,17 @@
         }
       };
 
-      $raven.captureException(exception, exception_data);
+      if (exception instanceof Error) {
+        $raven.captureException(exception, exception_data);
+      } else {
+        var message = '';
+        if (angular.isString(exception.message)) {
+          message = exception.message;
+        } else {
+          message = angular.isString(exception) ? exception : exception.statusText || '';
+        }
+        $raven.captureMessage(message, exception_data);
+      }
 
       $delegate(exception, cause);
     }
