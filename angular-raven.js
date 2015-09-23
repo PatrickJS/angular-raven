@@ -120,12 +120,12 @@
 
           function Wrapped() {
             var args = [], i = arguments.length;
-            while(i--) {
+            while (i--) {
               args[i] = RavenService.wrap(options, arguments[i]);
             }
             try {
               return func.apply(this, args);
-            } catch(e) {
+            } catch (e) {
               RavenService.captureException(e, options);
             }
           }
@@ -187,12 +187,10 @@
     return $ExceptionHandler;
   }
 
-
   angular.module('ngRaven', [])
   .provider('$raven', $RavenProvider)
   .provider('Raven',  $RavenProvider)
   .config(['$provide', $ExceptionHandlerProvider]);
-
 
   angular.module('angular-raven', ['ngRaven']);
 
