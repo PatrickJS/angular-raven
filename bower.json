@@ -1,6 +1,6 @@
 {
   "name": "angular-raven",
-  "version": "0.6.4",
+  "version": "0.6.5",
   "main": "angular-raven.js",
   "keywords": [
     "Patrick",
@@ -24,6 +24,10 @@
       "name": "Patrick Stapleton",
       "email": "github@gdi2290.com",
       "url": "www.gdi2290.com"
+    },
+    {
+      "name": "Rafael Belliard",
+      "url": "http://rebelliard.com/"
     }
   ],
   "ignore": [
@@ -37,6 +41,6 @@
   ],
   "dependencies": {
     "angular": "*",
-    "raven-js": "*"
+    "raven-js": "~1.2.0"
   }
 }

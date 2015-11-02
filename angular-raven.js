@@ -64,11 +64,11 @@
             $window.Raven.setExtraContext(data);
           }
         },
-        setReleaseContext: function setReleaseContext(data) {
+        setRelease: function setRelease(data) {
           if (_development) {
             $log.info('Raven: Release Context ', data);
           } else {
-            $window.Raven.setReleaseContext(data);
+            $window.Raven.setRelease(data);
           }
         },
         isSetup: function isSetup() {
