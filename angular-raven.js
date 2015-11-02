@@ -64,6 +64,22 @@
             $window.Raven.setExtraContext(data);
           }
         },
+        setRelease: function setRelease(data) {
+          if (_development) {
+            $log.info('Raven: Release Context ', data);
+          } else {
+            $window.Raven.setRelease(data);
+          }
+        },
+        isSetup: function isSetup() {
+            return $window.Raven.isSetup();
+        },
+        setDataCallback: function setDataCallback(callback) {
+            return $window.Raven.setDataCallback(callback);
+        },
+        setShouldSendCallback: function setShouldSendCallback(callback) {
+            return $window.Raven.setShouldSendCallback(callback);
+        },
         setTagsContext: function setTagsContext(data) {
           if (_development) {
             $log.info('Raven: Tags Context ', data);
@@ -104,12 +120,12 @@
 
           function Wrapped() {
             var args = [], i = arguments.length;
-            while(i--) {
+            while (i--) {
               args[i] = RavenService.wrap(options, arguments[i]);
             }
             try {
               return func.apply(this, args);
-            } catch(e) {
+            } catch (e) {
               RavenService.captureException(e, options);
             }
           }
@@ -153,7 +169,17 @@
         }
       };
 
-      $raven.captureException(exception, exception_data);
+      if (exception instanceof Error) {
+        $raven.captureException(exception, exception_data);
+      } else {
+        var message = '';
+        if (angular.isString(exception.message)) {
+          message = exception.message;
+        } else {
+          message = angular.isString(exception) ? exception : exception.statusText || '';
+        }
+        $raven.captureMessage(message, exception_data);
+      }
 
       $delegate(exception, cause);
     }
@@ -161,12 +187,10 @@
     return $ExceptionHandler;
   }
 
-
   angular.module('ngRaven', [])
   .provider('$raven', $RavenProvider)
   .provider('Raven',  $RavenProvider)
   .config(['$provide', $ExceptionHandlerProvider]);
-
 
   angular.module('angular-raven', ['ngRaven']);
 
