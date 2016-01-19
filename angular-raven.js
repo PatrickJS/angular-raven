@@ -64,6 +64,22 @@
             $window.Raven.setExtraContext(data);
           }
         },
+        setRelease: function setRelease(data) {
+          if (_development) {
+            $log.info('Raven: Release Context ', data);
+          } else {
+            $window.Raven.setRelease(data);
+          }
+        },
+        isSetup: function isSetup() {
+            return $window.Raven.isSetup();
+        },
+        setDataCallback: function setDataCallback(callback) {
+            return $window.Raven.setDataCallback(callback);
+        },
+        setShouldSendCallback: function setShouldSendCallback(callback) {
+            return $window.Raven.setShouldSendCallback(callback);
+        },
         setTagsContext: function setTagsContext(data) {
           if (_development) {
             $log.info('Raven: Tags Context ', data);
