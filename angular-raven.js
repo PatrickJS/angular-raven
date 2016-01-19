@@ -120,12 +120,12 @@
 
           function Wrapped() {
             var args = [], i = arguments.length;
-            while(i--) {
+            while (i--) {
               args[i] = RavenService.wrap(options, arguments[i]);
             }
             try {
               return func.apply(this, args);
-            } catch(e) {
+            } catch (e) {
               RavenService.captureException(e, options);
             }
           }
@@ -161,7 +161,7 @@
     function $ExceptionHandler(exception, cause) {
       $location = $location || $injector.get('$location');
 
-      var exception_data = {
+      var exceptionData = {
         culprit: $location.absUrl(),
         extra: {
           exception: exception,
@@ -169,7 +169,17 @@
         }
       };
 
-      $raven.captureException(exception, exception_data);
+      if (exception instanceof Error) {
+        $raven.captureException(exception, exceptionData);
+      } else {
+        var message = '';
+        if (angular.isString(exception.message)) {
+          message = exception.message;
+        } else {
+          message = angular.isString(exception) ? exception : exception.statusText || '';
+        }
+        $raven.captureMessage(message, exceptionData);
+      }
 
       $delegate(exception, cause);
     }
@@ -177,12 +187,10 @@
     return $ExceptionHandler;
   }
 
-
   angular.module('ngRaven', [])
   .provider('$raven', $RavenProvider)
   .provider('Raven',  $RavenProvider)
   .config(['$provide', $ExceptionHandlerProvider]);
-
 
   angular.module('angular-raven', ['ngRaven']);
 
