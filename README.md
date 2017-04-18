@@ -1,7 +1,7 @@
 # angular-raven [![Build Status](https://travis-ci.org/gdi2290/angular-raven.png?branch=master)](https://travis-ci.org/gdi2290/angular-raven)
 A Raven.js / Sentry wrapper for Angular.js
 
-#How do I add this to my project?
+# How do I add this to my project?
 
 You can download angular-raven by:
 
